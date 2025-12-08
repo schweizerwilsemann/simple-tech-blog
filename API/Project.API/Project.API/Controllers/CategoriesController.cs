@@ -40,5 +40,27 @@ namespace Project.API.Controllers
 
             return Ok(response);
         }
+    
+        // GET: /api/gategories
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await _categoryRepo.GetAllAsync();
+
+            // map domain model to DTO
+            var response = new List<CategoryDTO>();
+            foreach(var category in categories)
+            {
+                var dto = new CategoryDTO
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                };
+                response.Add(dto);
+            }
+
+            return Ok(response);
+        }
     }
 }

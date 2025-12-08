@@ -1,4 +1,5 @@
-﻿using Project.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.API.Data;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
 
@@ -17,6 +18,11 @@ namespace Project.API.Repositories.Implementation
             await _dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await _dbContext.Categories.ToListAsync();
         }
     }
 }
