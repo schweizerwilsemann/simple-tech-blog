@@ -5,7 +5,7 @@
 namespace Project.API.Migrations
 {
     /// <inheritdoc />
-    public partial class addfeaturedimageurl : Migration
+    public partial class Addfeaturedimageurl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

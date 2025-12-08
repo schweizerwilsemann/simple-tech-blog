@@ -13,7 +13,7 @@ namespace Project.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20251207021301_add featured image url")]
-    partial class addfeaturedimageurl
+    partial class Addfeaturedimageurl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

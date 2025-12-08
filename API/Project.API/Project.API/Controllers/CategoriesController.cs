@@ -54,8 +54,8 @@ namespace Project.API.Controllers
                 var dto = new CategoryDTO
                 {
                     Id = category.Id,
-                    Name = category.Name,
-                    UrlHandle = category.UrlHandle
+                    Name = category.Name!,
+                    UrlHandle = category.UrlHandle!
                 };
                 response.Add(dto);
             }
