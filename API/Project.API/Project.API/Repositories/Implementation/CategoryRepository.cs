@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project.API.Data;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
@@ -23,6 +24,11 @@ namespace Project.API.Repositories.Implementation
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _dbContext.Categories.ToListAsync();
+        }
+
+        public async Task<Category?> GetById([FromRoute] Guid categoryId)
+        {
+            return await _dbContext.Categories.FirstOrDefaultAsync(category => category.Id == categoryId);
         }
     }
 }

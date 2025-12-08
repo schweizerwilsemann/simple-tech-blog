@@ -18,7 +18,7 @@ namespace Project.API.Controllers
             this._categoryRepo = categoryRepo;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDTO request)
         {
             // map DTO to Domain model
             var category = new Category
@@ -60,6 +60,26 @@ namespace Project.API.Controllers
                 response.Add(dto);
             }
 
+            return Ok(response);
+        }
+
+        // GET: /api/categories/{id}
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetCategoryById([FromRoute]Guid id)
+        {
+            var existingCategory = await _categoryRepo.GetById(id);
+            if (existingCategory is null)
+            {
+                return NotFound();
+            }
+
+            var response = new CategoryDTO
+            {
+                Id = existingCategory.Id,
+                Name = existingCategory.Name!,
+                UrlHandle = existingCategory.UrlHandle!
+            };
             return Ok(response);
         }
     }
