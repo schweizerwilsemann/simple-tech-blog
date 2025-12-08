@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import Forms Modules
 import { AddCategoryRequest } from '@/app/features/categories/models/add-category-request.model';
+import { CategoryService } from '@/app/features/categories/services/category.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-category',
@@ -12,17 +14,25 @@ import { AddCategoryRequest } from '@/app/features/categories/models/add-categor
   templateUrl: './add-category.html',
   styleUrl: './add-category.scss',
 })
-export class AddCategory {
-  model: AddCategoryRequest
+export class AddCategory implements OnDestroy{
+  model: AddCategoryRequest;
+  private addCategorySubscription: Subscription | undefined;
 
-  constructor(){
+  constructor(private categoryService: CategoryService){
     this.model = {
       name : '',
       urlHandle: ''
     }
   }
+  ngOnDestroy(): void {
+    this.addCategorySubscription?.unsubscribe();
+  }
   onFormSubmit = () =>  {
-    console.log(">>>> check name: ", this.model.name);
-    console.log(">>>> check url handle: ", this.model.urlHandle);
+    this.addCategorySubscription = this.categoryService.addCategory(this.model).subscribe({
+      next: (response) => {
+        console.log(">>> successful: ", response);
+      },
+      error: (error) => {}
+    });
   }
 }
