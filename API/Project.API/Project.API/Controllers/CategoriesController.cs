@@ -4,6 +4,7 @@ using Project.API.Models.DTOs;
 using Project.API.Models.Domain;
 using Project.API.Data;
 using Project.API.Repositories.Interface;
+using Project.API.Repositories.Implementation;
 
 
 namespace Project.API.Controllers
@@ -82,5 +83,33 @@ namespace Project.API.Controllers
             };
             return Ok(response);
         }
+
+        // PUT: /api/categories/{id}
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> EditCategory ([FromRoute] Guid id, UpdateCategoryRequestDTO request)
+        {
+            // convert DTO to domain 
+            var category = new Category
+            {
+                Id = id,
+                Name = request.Name,
+                UrlHandle = request.UrlHandle
+            };
+            category = await _categoryRepo.UpdateAsync(category);
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            // convert domain to DTO
+            var response = new CategoryDTO
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+            return Ok(response);
+        } 
     }
 }
