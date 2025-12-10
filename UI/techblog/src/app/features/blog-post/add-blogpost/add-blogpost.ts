@@ -1,7 +1,9 @@
-import { AddBlogpost } from '@/app/features/blog-post/model/add-blogpost.model';
+import { AddBlogPost } from '@/app/features/blog-post/models/add-blogpost.model';
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlogPostService } from '@/app/features/blog-post/services/blog-post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -10,7 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './add-blogpost.scss',
 })
 export class AddBlogpostComponent {
-  model: AddBlogpost;
+  model: AddBlogPost;
+  private blogPostService = inject(BlogPostService);
+  private router = inject(Router);
 
   constructor () {
     this.model = {
@@ -26,6 +30,11 @@ export class AddBlogpostComponent {
   }
 
   onFormSubmit = () => {
-    console.log(this.model);
+    this.blogPostService.createBlogPost(this.model).subscribe({
+      next: () => {
+        this.router.navigate(['/admin/blogposts']);
+      },
+      error: (error) => console.log(error)
+    })
   }
 }
