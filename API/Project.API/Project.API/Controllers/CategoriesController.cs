@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Project.API.Models.DTOs;
 using Project.API.Models.Domain;
-using Project.API.Data;
 using Project.API.Repositories.Interface;
-using Project.API.Repositories.Implementation;
 
 
 namespace Project.API.Controllers
