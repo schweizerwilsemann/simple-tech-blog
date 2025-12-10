@@ -31,4 +31,8 @@ export class CategoryService {
   updateCategory = (categoryId: string, updateCategoryRequest: UpdateCategoryRequest): Observable<Category> => {
     return this.http.put<Category>(`${this.APP_API_URL}/categories/${categoryId}`, updateCategoryRequest);
   }
+
+  deleteCategory = (categoryId: string): Observable<void> => {
+    return this.http.delete<void>(`${this.APP_API_URL}/categories/${categoryId}`);
+  }
 }

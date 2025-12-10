@@ -26,7 +26,7 @@ export class EditCategory implements OnInit, OnDestroy {
   isLoading: boolean = true;  // ← Thêm loading flag
 
   constructor() {}
-  
+
   getRouter(): Router {
     return this.router;
   }
@@ -79,6 +79,20 @@ export class EditCategory implements OnInit, OnDestroy {
             console.error('Error updating category:', error);
           }
         });
+    }
+  }
+
+  onDelete(): void {
+    if (this.id){
+      this.categoryService.deleteCategory(this.id)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/admin/categories');
+        },
+        error: (error) => {
+          console.error('Error deleting category:', error);
+        }
+      });
     }
   }
 }
