@@ -110,6 +110,26 @@ namespace Project.API.Controllers
                 UrlHandle = category.UrlHandle
             };
             return Ok(response);
-        } 
+        }
+        // DELETE: /api/categories/{id}
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+        {
+            var category = await _categoryRepo.DeleteAsync(id);
+            if(category is null)
+            {
+                return NotFound();
+            }
+
+            // convert domain model to DTO
+            var response = new CategoryDTO
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+            return Ok(response);
+        }
     }
 }
