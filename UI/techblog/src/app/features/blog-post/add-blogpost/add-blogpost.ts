@@ -4,10 +4,11 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogPostService } from '@/app/features/blog-post/services/blog-post';
 import { Router } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-add-blogpost',
-  imports: [FormsModule, ReactiveFormsModule, DatePipe],
+  imports: [FormsModule, ReactiveFormsModule, DatePipe, MarkdownModule],
   templateUrl: './add-blogpost.html',
   styleUrl: './add-blogpost.scss',
 })

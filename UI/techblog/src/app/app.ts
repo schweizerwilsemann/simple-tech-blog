@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './core/components/navbar/navbar';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar],
+  standalone: true,
+  imports: [RouterOutlet, Navbar, MarkdownModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
