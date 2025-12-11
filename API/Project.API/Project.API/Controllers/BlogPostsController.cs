@@ -13,9 +13,12 @@ namespace Project.API.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly IBlogPostRepository _blogPostRepo;
-        public BlogPostsController(IBlogPostRepository blogPostRepo)
+        private readonly ICategoryRepository _categoryRepo;
+
+        public BlogPostsController(IBlogPostRepository blogPostRepo, ICategoryRepository categoryRepo)
         {
             this._blogPostRepo = blogPostRepo;
+            this._categoryRepo = categoryRepo;
         }
 
 
@@ -32,8 +35,19 @@ namespace Project.API.Controllers
                 UrlHandle = request.UrlHandle,
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
-                IsVisible = request.IsVisible
+                IsVisible = request.IsVisible,
+                Categories = []
             };
+
+            foreach (var categoryGuid in request.Categories)
+            {
+                var existingCategory = await _categoryRepo.GetById(categoryGuid);
+                if (existingCategory is not null)
+                {   
+                    blogPost.Categories.Add(existingCategory);
+                }
+
+            }
 
             blogPost = await _blogPostRepo.CreateAsync(blogPost);
 
@@ -48,7 +62,18 @@ namespace Project.API.Controllers
                 UrlHandle = blogPost.UrlHandle,
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
-                IsVisible = blogPost.IsVisible
+                IsVisible = blogPost.IsVisible,
+                Categories = [
+                    .. blogPost?.Categories?
+                        .Select(x => new CategoryDTO
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            UrlHandle = x.UrlHandle
+                        })
+                        ?? Enumerable.Empty<CategoryDTO>()
+                ]
+
             };
             return Ok(response);
         }   
@@ -73,7 +98,17 @@ namespace Project.API.Controllers
                     UrlHandle = blogPost.UrlHandle,
                     PublishedDate = blogPost.PublishedDate,
                     Author = blogPost.Author,
-                    IsVisible = blogPost.IsVisible
+                    IsVisible = blogPost.IsVisible,
+                    Categories = [
+                    .. blogPost?.Categories?
+                        .Select(x => new CategoryDTO
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            UrlHandle = x.UrlHandle
+                        })
+                        ?? Enumerable.Empty<CategoryDTO>()
+                    ]
                 });
             }
             return Ok(response);
