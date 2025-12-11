@@ -17,4 +17,8 @@ export class BlogPostService {
   createBlogPost(data: AddBlogPost) : Observable<BlogPost> {
     return this.http.post<BlogPost>(`${this.APP_API_URL}/blogposts`, data);
   }
+
+  getAllBlogPosts(): Observable<BlogPost[]> {
+    return this.http.get<BlogPost[]>(`${this.APP_API_URL}/blogposts`);
+  }
 }

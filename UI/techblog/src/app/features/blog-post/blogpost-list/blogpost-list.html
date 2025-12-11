@@ -4,4 +4,25 @@
   <div class="d-flex justify-content-end mt-3">
     <a [routerLink]="['/admin/blogposts/add']" class="btn btn-primary">Add BlogPost</a>
   </div>
+
+  @if (blogPosts$ | async; as blogPosts) {
+    <table class="table_customize mt-3">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Short Description</th>
+          <th>Is Visible?</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(blogPost of blogPosts; track blogPost.id){
+          <tr>
+            <td>{{ blogPost.title }}</td>
+            <td>{{ blogPost.shortDescription }}</td>
+            <td>{{ blogPost.isVisible }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
 </div>
