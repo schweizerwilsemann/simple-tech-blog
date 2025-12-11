@@ -1,4 +1,6 @@
-﻿namespace Project.API.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Project.API.Models.Domain
 {
     public class Category
     {
@@ -6,5 +8,6 @@
         public string? Name { get; set; }
         public string? UrlHandle { get; set; }
 
+        public ICollection<BlogPost>? BlogPosts { get; set; }
     }
 }
