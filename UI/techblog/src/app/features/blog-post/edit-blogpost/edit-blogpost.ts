@@ -9,10 +9,11 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CategoryService } from '@/app/features/categories/services/category.service';
 import { Category } from '@/app/features/categories/models/category.model';
 import { UpdateBlogPost } from '@/app/features/blog-post/models/update-blogpost.model';
+import { ImageSelector } from '@/app/shared/components/image-selector/image-selector';
 
 @Component({
   selector: 'app-edit-blogpost',
-  imports: [FormsModule, ReactiveFormsModule, DatePipe, AsyncPipe,MarkdownModule],
+  imports: [FormsModule, ReactiveFormsModule, DatePipe, AsyncPipe,MarkdownModule, ImageSelector],
   templateUrl: './edit-blogpost.html',
   styleUrl: './edit-blogpost.scss',
 })
@@ -21,6 +22,8 @@ export class EditBlogpost implements OnInit, OnDestroy{
   model?: BlogPost
   categories$? : Observable<Category []>;
   selectedCategories?: string[];
+  isImageSelectorVisible: boolean = false;
+
 
   routeSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
@@ -108,4 +111,10 @@ export class EditBlogpost implements OnInit, OnDestroy{
     }
   }
 
+  openImageSelector(): void {
+    this.isImageSelectorVisible = true;
+  }
+  closeImageSelector(): void {
+    this.isImageSelectorVisible = false;
+  }
 }
