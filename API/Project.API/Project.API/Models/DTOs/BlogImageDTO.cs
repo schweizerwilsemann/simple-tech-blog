@@ -1,6 +1,6 @@
-namespace Project.API.Models.Domain
+namespace Project.API.Models.DTOs
 {
-    public class BlogImage
+    public class BlogImageDTO
     {
         public Guid? Id { get; set; }
         public required string FileName { get; set; }
