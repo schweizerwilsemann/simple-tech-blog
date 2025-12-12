@@ -31,4 +31,7 @@ export class BlogPostService {
     return this.http.put<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`, updatedBlogPost);
   }
 
+  deleteBlogPost(id: string): Observable<BlogPost> {
+    return this.http.delete<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`);
+  }
 }

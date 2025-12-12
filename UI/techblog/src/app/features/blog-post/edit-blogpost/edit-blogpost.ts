@@ -18,13 +18,15 @@ import { UpdateBlogPost } from '@/app/features/blog-post/models/update-blogpost.
 })
 export class EditBlogpost implements OnInit, OnDestroy{
   id : string | null = null;
-  routeSubscription?: Subscription;
-  updateBlogPostSubscription?: Subscription;
-  getBlogPostSubscription?: Subscription;
-
   model?: BlogPost
   categories$? : Observable<Category []>;
   selectedCategories?: string[];
+
+  routeSubscription?: Subscription;
+  updateBlogPostSubscription?: Subscription;
+  getBlogPostSubscription?: Subscription;
+  deleteBlogPostSubscription?: Subscription;
+
 
 
   private route = inject(ActivatedRoute);
@@ -69,6 +71,7 @@ export class EditBlogpost implements OnInit, OnDestroy{
     this.routeSubscription?.unsubscribe();
     this.updateBlogPostSubscription?.unsubscribe();
     this.getBlogPostSubscription?.unsubscribe();
+    this.deleteBlogPostSubscription?.unsubscribe();
   }
 
   onFormSubmit(): void {
@@ -88,6 +91,17 @@ export class EditBlogpost implements OnInit, OnDestroy{
 
       this.updateBlogPostSubscription = this.blogPostService.updateBlogPost(this.id, updateBlogPost).subscribe({
         next: (blogPost) => {
+          this.router.navigateByUrl("admin/blogposts")
+        }
+      })
+    }
+  }
+
+  onDelete = (): void => {
+    if(this.id){
+      // call service and delete blogpost
+      this.deleteBlogPostSubscription = this.blogPostService.deleteBlogPost(this.id).subscribe({
+        next: () => {
           this.router.navigateByUrl("admin/blogposts")
         }
       })
