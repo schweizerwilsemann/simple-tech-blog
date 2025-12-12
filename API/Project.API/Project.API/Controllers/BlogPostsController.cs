@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project.API.Models.DTOs;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
-using CodePulse.API.Models.DTO;
+using Project.API.Models.DTO;
 
 
 namespace Project.API.Controllers
@@ -128,16 +128,75 @@ namespace Project.API.Controllers
             // convert domain model to DTO
             var response = new BlogPostDTO
             {
-                    Id = blogPost.Id,
-                    Title = blogPost.Title,
-                    ShortDescription = blogPost.ShortDescription,
-                    Content = blogPost.Content,
-                    FeaturedImageUrl = blogPost.FeaturedImageUrl,
-                    UrlHandle = blogPost.UrlHandle,
-                    PublishedDate = blogPost.PublishedDate,
-                    Author = blogPost.Author,
-                    IsVisible = blogPost.IsVisible,
-                    Categories = [
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = [
+                .. blogPost?.Categories?
+                    .Select(x => new CategoryDTO
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle
+                    })
+                    ?? []
+                ]
+            };
+            return Ok(response);
+        }
+    
+        // PUT: /api/blogposts/{id}
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateBlogPostById([FromRoute] Guid id, UpdateBlogPostRequestDTO request)
+        {
+            // convert DTO to domain model
+            var blogPost = new BlogPost
+            {
+                Id = id,
+                Title = request.Title,
+                ShortDescription = request.ShortDescription,
+                Content = request.Content,
+                FeaturedImageUrl = request.FeaturedImageUrl,
+                UrlHandle = request.UrlHandle,
+                PublishedDate = request.PublishedDate,
+                Author = request.Author,
+                IsVisible = request.IsVisible,
+                Categories = []
+            };
+
+            foreach (var categoryGuid in request.Categories)
+            {
+                var existingCategory = await _categoryRepo.GetById(categoryGuid);
+                if(existingCategory != null)
+                {
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
+            var updatedBlogPost = await _blogPostRepo.UpdateAsync(blogPost);
+            if(updatedBlogPost == null)
+            {
+                return NotFound();
+            }
+
+            var response = new BlogPostDTO
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = [
                     .. blogPost?.Categories?
                         .Select(x => new CategoryDTO
                         {
@@ -145,10 +204,11 @@ namespace Project.API.Controllers
                             Name = x.Name,
                             UrlHandle = x.UrlHandle
                         })
-                        ?? []
-                    ]
-                };
-                return Ok(response);
+                        ?? Enumerable.Empty<CategoryDTO>()
+                ]
+
+            };
+            return Ok(response);
         }
     }
 }

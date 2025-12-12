@@ -37,9 +37,22 @@ namespace Project.API.Repositories.Implementation
             return await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(blogPost => blogPost.Id == id);
         }
 
-        public Task<BlogPost?> UpdateAsync(BlogPost blogPost)
+        public async Task<BlogPost?> UpdateAsync(BlogPost blogPost)
         {
-            throw new NotImplementedException();
+            var existingBlogPost = await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == blogPost.Id);
+            if (existingBlogPost == null)
+            {
+                return null;
+            }
+
+            // update blogpost
+            _dbContext.Entry(existingBlogPost).CurrentValues.SetValues(blogPost);
+            // update categories
+            existingBlogPost.Categories = blogPost.Categories;
+
+            // save change
+            await _dbContext.SaveChangesAsync();
+            return existingBlogPost;
         }
     }
 }

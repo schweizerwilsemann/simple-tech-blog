@@ -1,6 +1,6 @@
 namespace Project.API.Models.DTO
 {
-    public class CreateBlogPostRequestDTO
+    public class UpdateBlogPostRequestDTO
     {
         public string? Title { get; set; }
         public string? ShortDescription{ get; set; }
@@ -11,7 +11,6 @@ namespace Project.API.Models.DTO
         public string? Author { get; set; }
         public bool IsVisible { get; set; }
         
-        public required Guid[] Categories { get; set; }
-    
+        public required Guid[] Categories { get; set; } = [];
     }
 }
