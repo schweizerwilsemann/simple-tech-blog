@@ -22,9 +22,16 @@ namespace Project.API.Repositories.Implementation
             return blogPost;
         }
 
-        public Task<BlogPost?> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
+        public async Task<BlogPost?> DeleteAsync(Guid id)
+        {   
+            var existingBlogPost = await _dbContext.BlogPosts.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingBlogPost != null)
+            {
+                _dbContext.BlogPosts.Remove(existingBlogPost);
+                await _dbContext.SaveChangesAsync();
+                return existingBlogPost;
+            }
+            return null;      
         }
 
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
