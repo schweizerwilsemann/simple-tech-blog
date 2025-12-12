@@ -32,9 +32,9 @@ namespace Project.API.Repositories.Implementation
             return await _dbContext.BlogPosts.Include(x => x.Categories).ToListAsync();
         }
 
-        public Task<BlogPost?> GetById(Guid id)
+        public async Task<BlogPost?> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(blogPost => blogPost.Id == id);
         }
 
         public Task<BlogPost?> UpdateAsync(BlogPost blogPost)

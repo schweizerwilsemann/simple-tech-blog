@@ -107,12 +107,48 @@ namespace Project.API.Controllers
                             Name = x.Name,
                             UrlHandle = x.UrlHandle
                         })
-                        ?? Enumerable.Empty<CategoryDTO>()
+                        ?? []
                     ]
                 });
             }
             return Ok(response);
         }
 
+        // GET /api/blogposts/{id}
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetBlogPostById([FromRoute] Guid id)
+        {
+            var blogPost = await _blogPostRepo.GetById(id);
+            if (blogPost is null)
+            {
+                return NotFound();
+            }
+
+            // convert domain model to DTO
+            var response = new BlogPostDTO
+            {
+                    Id = blogPost.Id,
+                    Title = blogPost.Title,
+                    ShortDescription = blogPost.ShortDescription,
+                    Content = blogPost.Content,
+                    FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                    UrlHandle = blogPost.UrlHandle,
+                    PublishedDate = blogPost.PublishedDate,
+                    Author = blogPost.Author,
+                    IsVisible = blogPost.IsVisible,
+                    Categories = [
+                    .. blogPost?.Categories?
+                        .Select(x => new CategoryDTO
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            UrlHandle = x.UrlHandle
+                        })
+                        ?? []
+                    ]
+                };
+                return Ok(response);
+        }
     }
 }
