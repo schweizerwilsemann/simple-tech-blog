@@ -1,5 +1,5 @@
 
-.PHONY: run-api run-ui run
+.PHONY: run-api run-ui run-install-ui run
 
 run-api:
 	@echo "Starting API..."
@@ -7,7 +7,11 @@ run-api:
 
 run-ui:
 	@echo "Starting UI..."
-	@cd UI/techblog && npm install && npm run dev
+	@cd UI/techblog && npm run dev
+
+run-install-ui:
+	@echo "Install Dependencies UI..."
+	@cd UI/techblog && npm install
 
 # Run both API and UI concurrently
 run:
