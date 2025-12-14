@@ -2,6 +2,7 @@
 using Project.API.Models.DTOs;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Project.API.Controllers
