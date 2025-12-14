@@ -57,5 +57,9 @@ export class ImageSelector implements OnInit, OnDestroy{
     }
   }
 
+  selectImage(blogPostImage: BlogImage): void {
+    this.imageService.selectImage(blogPostImage);
+  }
+
 
 }

@@ -8,7 +8,10 @@
         @if(images$ | async; as images){
           <div class="d-flex flex-wrap">
             @for(image of images; track $index) {
-              <div class="me-1 bg-white d-flex align-item-center flex-column border p-3" style="min-width: 100px; justify-content: center; cursor: pointer;">
+              <div class="me-1 bg-white d-flex align-item-center flex-column border p-3"
+                  style="min-width: 100px; justify-content: center; cursor: pointer;"
+                  (click)="selectImage(image)"
+                >
                 <img [src]="image.url" [title]="image.title" style="height: 100px;" class="img-thumbnail">
                 <span class="mt-1 d-block">{{image.title}}</span>
               </div>

@@ -10,6 +10,7 @@ import { CategoryService } from '@/app/features/categories/services/category.ser
 import { Category } from '@/app/features/categories/models/category.model';
 import { UpdateBlogPost } from '@/app/features/blog-post/models/update-blogpost.model';
 import { ImageSelector } from '@/app/shared/components/image-selector/image-selector';
+import { ImageService } from '@/app/shared/components/image-selector/image';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -29,6 +30,8 @@ export class EditBlogpost implements OnInit, OnDestroy{
   updateBlogPostSubscription?: Subscription;
   getBlogPostSubscription?: Subscription;
   deleteBlogPostSubscription?: Subscription;
+  imageSelectSubscription?: Subscription;
+
 
 
 
@@ -37,6 +40,7 @@ export class EditBlogpost implements OnInit, OnDestroy{
   private blogPostService = inject(BlogPostService);
   private categoryService = inject(CategoryService);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private imageService = inject(ImageService);
 
 
   blogPost?: BlogPost;
@@ -67,6 +71,16 @@ export class EditBlogpost implements OnInit, OnDestroy{
             }
           });
         }
+
+
+        this.imageSelectSubscription = this.imageService.onSelectImage().subscribe({
+          next: (response) => {
+            if(this.model){
+              this.model!.featuredImageUrl = response.url;
+              this.isImageSelectorVisible = false;
+            }
+          }
+        })
       },
     })
   }
@@ -75,6 +89,7 @@ export class EditBlogpost implements OnInit, OnDestroy{
     this.updateBlogPostSubscription?.unsubscribe();
     this.getBlogPostSubscription?.unsubscribe();
     this.deleteBlogPostSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
   }
 
   onFormSubmit(): void {
