@@ -1,4 +1,4 @@
-using System.Numerics;
+using Microsoft.EntityFrameworkCore;
 using Project.API.Data;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
@@ -18,6 +18,21 @@ namespace Project.API.Repositories.Implementation
             this.webHostEnvironment = webHostEnvironment;
             this.httpContextAccessor = httpContextAccessor;
             this.dbContext = dbContext;
+        }
+
+        public Task<BlogImage?> DeleteAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<BlogImage>> GetAllAsync()
+        {   
+            return await dbContext.BlogImages.OrderByDescending(x => x.DateCreated).ToListAsync();
+        }
+
+        public Task<BlogImage?> GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<BlogImage?> Upload(IFormFile file, BlogImage blogImage)

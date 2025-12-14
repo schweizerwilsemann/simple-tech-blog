@@ -70,5 +70,27 @@ namespace Project.API.Controllers
             return BadRequest(ModelState);
         }
 
+        // GET: /api/images
+        [HttpGet]
+        public async Task<IActionResult> GetAllImages()
+        {
+            // call repository
+            var images = await imageRepository.GetAllAsync();
+            // convert domain model to DTO
+            var response = new List<BlogImageDTO>();
+            foreach (var image in images)
+            {
+                response.Add(new BlogImageDTO
+                {
+                    Id = image.Id,
+                    FileName = image.FileName,
+                    FileExtension = image.FileExtension,
+                    Title = image.Title,
+                    Url = image.Url,
+                    DateCreated = image.DateCreated
+                });
+            }
+            return Ok(response);
+        }
     }
 }
