@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './image-selector.html',
   styleUrl: './image-selector.scss',
 })
-export class ImageSelector implements OnInit, OnDestroy{
+export class ImageSelector implements OnInit{
   private file?: File;
   private imageService = inject(ImageService);
 
@@ -29,10 +29,6 @@ export class ImageSelector implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.getAllImages();
-  }
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 
 

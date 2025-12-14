@@ -38,9 +38,10 @@ namespace Project.API.Repositories.Implementation
         public async Task<BlogImage?> Upload(IFormFile file, BlogImage blogImage)
         {
             // upload to api/images folder - just simple
+            var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
             var localPath = Path
-                            .Combine(webHostEnvironment.ContentRootPath,
-                                "Images", $"{blogImage.FileName}-{blogImage.Id}{blogImage.FileExtension}");
+                .Combine(webHostEnvironment.ContentRootPath,
+                    "Images", $"{blogImage.FileName}-{timestamp}{blogImage.FileExtension}");
             using var stream = new FileStream(localPath, FileMode.Create);
             await file.CopyToAsync(stream);
 
@@ -52,7 +53,7 @@ namespace Project.API.Repositories.Implementation
             {
                 return null;
             }
-            var urlPath = $"{httpRequest.Scheme}://{httpRequest.Host}{httpRequest.PathBase}/images/{blogImage.FileName}-{blogImage.Id}{blogImage.FileExtension}";
+            var urlPath = $"{httpRequest.Scheme}://{httpRequest.Host}{httpRequest.PathBase}/images/{blogImage.FileName}-{timestamp}{blogImage.FileExtension}";
 
             blogImage.Url = urlPath;
 
