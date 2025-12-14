@@ -1,0 +1,106 @@
+
+.blog-content ::ng-deep img {
+  max-width: 100%;
+  margin: 2em 0;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease-in-out;
+}
+
+.blog-content ::ng-deep img:hover {
+  transform: scale(1.02);
+}
+
+
+// Technical Style Overhaul
+
+// Color Palette
+// $dark-bg: #121212;
+// $light-text: #e0e0e0;
+// $accent-color: #00ffff; // Cyan/Aqua
+// $secondary-text: #888;
+
+// :host {
+//   display: block;
+//   background-color: $dark-bg;
+//   color: $light-text;
+//   border-top: 1px solid $accent-color;
+//   padding-top: 2rem;
+//   padding-bottom: 2rem;
+// }
+
+// h1 {
+//   font-family: 'Roboto Mono', monospace;
+//   color: $accent-color;
+//   text-shadow: 0 0 8px rgba($accent-color, 0.7);
+//   letter-spacing: 1.5px;
+// }
+
+// .d-flex.justify-content-between span {
+//   font-family: 'Roboto Mono', monospace;
+//   color: $secondary-text;
+//   font-size: 0.9em;
+// }
+
+// .badge.bg-secondary {
+//   background-color: transparent !important;
+//   border: 1px solid $accent-color;
+//   color: $accent-color;
+//   font-weight: normal;
+//   font-family: 'Roboto Mono', monospace;
+// }
+
+// .blog-content ::ng-deep {
+//   font-family: 'Source Code Pro', monospace;
+//   line-height: 1.7;
+
+//   p, li {
+//     color: $light-text;
+//   }
+
+//   a {
+//     color: $accent-color;
+//     text-decoration: none;
+//     transition: background-color 0.2s ease;
+//     &:hover {
+//       background-color: rgba($accent-color, 0.2);
+//     }
+//   }
+
+//   h2, h3, h4, h5, h6 {
+//     color: $accent-color;
+//     font-family: 'Roboto Mono', monospace;
+//     border-bottom: 1px solid $secondary-text;
+//     padding-bottom: 0.3em;
+//   }
+
+//   pre, code {
+//     background-color: #1e1e1e;
+//     border: 1px solid #333;
+//     border-radius: 5px;
+//     padding: 1em;
+//     color: #d4d4d4;
+//   }
+
+//   blockquote {
+//     border-left: 3px solid $accent-color;
+//     padding-left: 1em;
+//     margin-left: 0;
+//     color: $secondary-text;
+//     font-style: italic;
+//   }
+
+//   img {
+//     max-width: 100%;
+//     margin: 2em 0;
+//     border-radius: 8px;
+//     border: 1px solid rgba($accent-color, 0.5);
+//     box-shadow: 0 0 15px rgba($accent-color, 0.3);
+//     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+//     &:hover {
+//       transform: scale(1.02);
+//       box-shadow: 0 0 25px rgba($accent-color, 0.6);
+//     }
+//   }
+// }

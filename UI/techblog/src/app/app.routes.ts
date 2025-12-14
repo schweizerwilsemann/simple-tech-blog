@@ -6,11 +6,16 @@ import { BlogpostList } from './features/blog-post/blogpost-list/blogpost-list';
 import { AddBlogpostComponent} from './features/blog-post/add-blogpost/add-blogpost';
 import { EditBlogpost } from './features/blog-post/edit-blogpost/edit-blogpost';
 import { Home } from './features/public/home/home';
+import { BlogDetails } from './features/public/blog-details/blog-details';
 
 export const routes: Routes = [
   {
     path: '',
     component: Home
+  },
+  {
+    path: 'blog/:url',
+    component: BlogDetails
   },
   {
     path: "admin/categories",

@@ -27,6 +27,10 @@ export class BlogPostService {
     return this.http.get<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`);
   }
 
+  getBlogPostByUrlHandle(urlHandle: string): Observable<BlogPost> {
+    return this.http.get<BlogPost>(`${this.APP_API_URL}/blogposts/${urlHandle}`);
+  }
+
   updateBlogPost(id: string, updatedBlogPost: UpdateBlogPost): Observable<BlogPost> {
     return this.http.put<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`, updatedBlogPost);
   }
@@ -34,4 +38,6 @@ export class BlogPostService {
   deleteBlogPost(id: string): Observable<BlogPost> {
     return this.http.delete<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`);
   }
+
+
 }
