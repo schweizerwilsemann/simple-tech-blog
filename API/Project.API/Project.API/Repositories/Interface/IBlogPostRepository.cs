@@ -8,6 +8,8 @@ namespace Project.API.Repositories.Interface
         Task<IEnumerable<BlogPost>> GetAllAsync();
 
         Task<BlogPost?> GetById(Guid id);
+        Task<BlogPost?> GetByUrlHandleAsync(string urlHandle);
+
 
         Task<BlogPost?> UpdateAsync(BlogPost blogPost);
 
