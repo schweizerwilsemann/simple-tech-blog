@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project.API.Models.DTOs;
+using Project.API.Repositories.Interface;
 
 
 namespace Project.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(UserManager<IdentityUser> userManager) : ControllerBase
+    public class AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository) : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager = userManager;
 
@@ -25,11 +26,14 @@ namespace Project.API.Controllers
                 {
                     var roles = await userManager.GetRolesAsync(identityUser);
                     // create a token and response
+                    var jwtToken = tokenRepository.CreateJwtToken(identityUser, [.. roles]);
+
+
                     var response = new LoginResponseDTO
                     {
                         Email = request.Email,
                         Roles = [.. roles],
-                        Token = "TOKEN"
+                        Token = jwtToken
                     };
                     return Ok(response);
                 }

@@ -10,12 +10,10 @@ namespace Project.API.Controllers
     // http://localhost:xxxx/api/categories
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController(ICategoryRepository categoryRepo) : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepo;
-        public CategoriesController(ICategoryRepository categoryRepo) {
-            this._categoryRepo = categoryRepo;
-        }
+        private readonly ICategoryRepository _categoryRepo = categoryRepo;
+
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDTO request)
         {
