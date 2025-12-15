@@ -44,9 +44,11 @@ namespace Project.API.Data
                 Email = "admin@admin.com",
                 NormalizedEmail = "admin@admin.com".ToUpper(),
                 NormalizedUserName = "admin@admin.com".ToUpper(),
+                PasswordHash = "AQAAAAIAAYagAAAAELe36+6MvN+Jyl90GTj3A8f3/n8a+aG/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p==",
+                SecurityStamp = adminUserId,
+                ConcurrencyStamp = adminUserId
             };
 
-            admin.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(admin, "123456");
             builder.Entity<IdentityUser>().HasData(admin);
 
             // give role to admin
