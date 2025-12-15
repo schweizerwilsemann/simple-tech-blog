@@ -12,6 +12,34 @@ namespace Project.API.Controllers
     {
         private readonly UserManager<IdentityUser> userManager = userManager;
 
+        // POST: /api/auth/login
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
+        {
+            var identityUser = await userManager.FindByEmailAsync(request.Email);
+            if(identityUser is not null)
+            {
+                var checkPasswordResult = await userManager.CheckPasswordAsync(identityUser, request.Password);
+                if (checkPasswordResult)
+                {
+                    var roles = await userManager.GetRolesAsync(identityUser);
+                    // create a token and response
+                    var response = new LoginResponseDTO
+                    {
+                        Email = request.Email,
+                        Roles = [.. roles],
+                        Token = "TOKEN"
+                    };
+                    return Ok(response);
+                }
+            }
+            ModelState.AddModelError("", "Email or password is incorrect.");
+            return ValidationProblem(ModelState);
+        }
+
+
+
 
         // POST: /api/auth/register
         [HttpPost]

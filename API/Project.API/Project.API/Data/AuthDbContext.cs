@@ -44,7 +44,8 @@ namespace Project.API.Data
                 Email = "admin@admin.com",
                 NormalizedEmail = "admin@admin.com".ToUpper(),
                 NormalizedUserName = "admin@admin.com".ToUpper(),
-                PasswordHash = "AQAAAAIAAYagAAAAELe36+6MvN+Jyl90GTj3A8f3/n8a+aG/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p==",
+                //123456
+                PasswordHash = "AQAAAAIAAYagAAAAEC2iXjausjbhdnIWrumlX/kWllNP45JVD32wu+D+m6Q8r5+a6oe3beDFRDR3+6TF3g==",
                 SecurityStamp = adminUserId,
                 ConcurrencyStamp = adminUserId
             };
