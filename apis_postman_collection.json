@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "864323cd-5468-4dcd-ae27-dbcee3717bb7",
+		"name": "Code Blogs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37755279"
+	},
+	"item": [
+		{
+			"name": "create category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JavaScript\",\r\n    \"urlHandle\": \"JavaScript-blog\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/categories",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/categories?sortBy=Name&sortDirection=desc&pageNumber=2&pageSize=5",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "sortBy",
+							"value": "Name"
+						},
+						{
+							"key": "sortDirection",
+							"value": "desc"
+						},
+						{
+							"key": "pageNumber",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get category by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"JavaScript\",\r\n    \"urlHandle\": \"JavaScript-blog\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/categories/d07520f4-ae9a-4caf-3a31-08de360a4e69",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"d07520f4-ae9a-4caf-3a31-08de360a4e69"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"CSS update\",\r\n    \"urlHandle\": \"CSS-url-updated\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/categories/568F43ED-A906-49FC-D8F7-08DE36300E1B",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"568F43ED-A906-49FC-D8F7-08DE36300E1B"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"CSS update\",\r\n    \"urlHandle\": \"CSS-url-updated\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/categories/374ee807-f2ea-4e6a-55c7-08de353a8135",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"374ee807-f2ea-4e6a-55c7-08de353a8135"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create blog post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test title\",\r\n    \"shortDescription\": \"some shortDescription\",\r\n    \"content\": \"test content\",\r\n    \"featuredImageUrl\": \"featuredImageUrl.jpg\",\r\n    \"urlHandle\": \"some-blog\",\r\n    \"publishedDate\": \"2025-12-10T10:11:23.550Z\",\r\n    \"author\": \"Khoa\",\r\n    \"isVisible\": true,\r\n    \"categories\": [\"f7e87e48-e197-4488-55c6-08de353a8135\", \"d531fc1a-29c6-467a-a868-08de353aa1b0\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all blog posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get blog post by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts/04db3dee-a48c-4889-edd2-08de385d29d6",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts",
+						"04db3dee-a48c-4889-edd2-08de385d29d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get blog post by URL handle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts/html-website-using-chatgpt",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts",
+						"html-website-using-chatgpt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update blog post by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test title --updated\",\r\n    \"shortDescription\": \"some shortDescription --updated\",\r\n    \"content\": \"test content --updated\",\r\n    \"featuredImageUrl\": \"featuredImageUrl.jpg --updated\",\r\n    \"urlHandle\": \"some-blog --updated\",\r\n    \"publishedDate\": \"2025-11-10T10:11:23.550Z\",\r\n    \"author\": \"Khoa --updated\",\r\n    \"isVisible\": false,\r\n    \"categories\": [\"d531fc1a-29c6-467a-a868-08de353aa1b0\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts/04db3dee-a48c-4889-edd2-08de385d29d6",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts",
+						"04db3dee-a48c-4889-edd2-08de385d29d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete blog post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{backend_url}}/api/blogposts/04db3dee-a48c-4889-edd2-08de385d29d6",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"blogposts",
+						"04db3dee-a48c-4889-edd2-08de385d29d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbjFAYWRtaW4uY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUmVhZGVyIiwiZXhwIjoxNzY1ODQ2NjE2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyNjgiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.miZSmpadsT6Exn5xDwhy8gkmoNlsGOjeu68BxnyGXa0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/null/OneDrive/Pictures/Saved Pictures/1d940f3d17f0bedee7a481084d4a26fc.jpg"
+						},
+						{
+							"key": "fileName",
+							"value": "TESTFILE Image",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Anime",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/images",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Images",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/null/OneDrive/Pictures/Saved Pictures/1d940f3d17f0bedee7a481084d4a26fc.jpg"
+						},
+						{
+							"key": "fileName",
+							"value": "TESTFILE Image",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Anime",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/images",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin1@admin.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/auth/register",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin1@admin.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backend_url}}/api/auth/login",
+					"host": [
+						"{{backend_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "backend_url",
+			"value": ""
+		}
+	]
+}
