@@ -15,5 +15,6 @@ namespace Project.API.Repositories.Interface
 
         Task<Category?> DeleteAsync(Guid id);
 
+        Task<int> GetCategoryTotal();
     }
 }

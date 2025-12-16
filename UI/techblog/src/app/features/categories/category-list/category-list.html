@@ -61,5 +61,22 @@
         }
       </tbody>
     </table>
+
+    <nav aria-label="Page nav">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" (click)="getPrevPage()" style="cursor: pointer">Previous</a>
+        </li>
+        @for (item of list; track $index; let index = $index) {
+          <li class="page-item">
+            <a class="page-link" (click)="getPage(index + 1)" style="cursor: pointer">{{ index + 1}}</a>
+          </li>
+        }
+        <li class="page-item">
+          <a class="page-link" (click)="getNextPage()" style="cursor: pointer">Next</a>
+        </li>
+
+      </ul>
+    </nav>
   }
 </div>

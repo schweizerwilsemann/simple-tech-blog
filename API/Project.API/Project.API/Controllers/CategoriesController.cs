@@ -135,5 +135,15 @@ namespace Project.API.Controllers
             };
             return Ok(response);
         }
+
+        // GET: categories/count
+        [HttpGet]
+        [Route("count")]
+        //[Authorize(Roles = "Writer")]
+        public async Task<IActionResult> GetCategoryTotal()
+        {
+            var count = await _categoryRepo.GetCategoryTotal();
+            return Ok(count);
+        }
     }
 }

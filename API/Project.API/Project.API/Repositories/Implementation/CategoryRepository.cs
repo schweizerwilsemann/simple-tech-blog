@@ -89,5 +89,10 @@ namespace Project.API.Repositories.Implementation
             await _dbContext.SaveChangesAsync();
             return existingCategory;
         }
+
+        public async Task<int> GetCategoryTotal()
+        {
+            return await _dbContext.Categories.CountAsync();
+        }
     }
 }
