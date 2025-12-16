@@ -6,6 +6,7 @@ import { environment } from '@/environments/environment.development';
 import { Category } from '@/app/features/categories/models/category.model';
 import { UpdateCategoryRequest } from '@/app/features/categories/models/update-category-request.model';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +18,7 @@ export class CategoryService {
 
 
   addCategory = (category: AddCategoryRequest): Observable<void> => {
-    return this.http.post<void>(`${this.APP_API_URL}/categories`, category);
+    return this.http.post<void>(`${this.APP_API_URL}/categories?addAuth=true`, category);
   }
 
   getAllCategories = (): Observable<Category[]> => {
@@ -29,10 +30,11 @@ export class CategoryService {
   }
 
   updateCategory = (categoryId: string, updateCategoryRequest: UpdateCategoryRequest): Observable<Category> => {
-    return this.http.put<Category>(`${this.APP_API_URL}/categories/${categoryId}`, updateCategoryRequest);
+    return this.http.put<Category>(`${this.APP_API_URL}/categories/${categoryId}?addAuth=true`,
+                                    updateCategoryRequest);
   }
 
   deleteCategory = (categoryId: string): Observable<void> => {
-    return this.http.delete<void>(`${this.APP_API_URL}/categories/${categoryId}`);
+    return this.http.delete<void>(`${this.APP_API_URL}/categories/${categoryId}?addAuth=true`);
   }
 }

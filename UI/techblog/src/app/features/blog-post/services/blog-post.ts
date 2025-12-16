@@ -16,7 +16,7 @@ export class BlogPostService {
 
   constructor() {}
   createBlogPost(data: AddBlogPost) : Observable<BlogPost> {
-    return this.http.post<BlogPost>(`${this.APP_API_URL}/blogposts`, data);
+    return this.http.post<BlogPost>(`${this.APP_API_URL}/blogposts?addAuth=true`, data);
   }
 
   getAllBlogPosts(): Observable<BlogPost[]> {
@@ -32,12 +32,10 @@ export class BlogPostService {
   }
 
   updateBlogPost(id: string, updatedBlogPost: UpdateBlogPost): Observable<BlogPost> {
-    return this.http.put<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`, updatedBlogPost);
+    return this.http.put<BlogPost>(`${this.APP_API_URL}/blogposts/${id}?addAuth=true`, updatedBlogPost);
   }
 
   deleteBlogPost(id: string): Observable<BlogPost> {
-    return this.http.delete<BlogPost>(`${this.APP_API_URL}/blogposts/${id}`);
+    return this.http.delete<BlogPost>(`${this.APP_API_URL}/blogposts/${id}?addAuth=true`);
   }
-
-
 }

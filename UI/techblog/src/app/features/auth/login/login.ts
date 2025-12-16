@@ -31,7 +31,7 @@ export class Login {
     this.authService.login(this.model).subscribe({
       next: (response) => {
         // save auth cookie
-        this.cookieService.set('Authorization', `Bearer ${response.token}}`,
+        this.cookieService.set('Authorization', `Bearer ${response.token}`,
           undefined, '/', undefined, true, 'Strict'
         );
 
