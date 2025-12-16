@@ -9,6 +9,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
+
+        @if(user !== undefined && user.roles.includes('Writer')) {
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
@@ -21,6 +24,7 @@
             <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </li>
+      }
       </ul>
       <div class="d-flex">
         @if(user === undefined){
