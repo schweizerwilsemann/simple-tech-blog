@@ -15,6 +15,7 @@ namespace Project.API.Controllers
         private readonly ICategoryRepository _categoryRepo = categoryRepo;
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDTO request)
         {
             // map DTO to Domain model
@@ -83,6 +84,7 @@ namespace Project.API.Controllers
         // PUT: /api/categories/{id}
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditCategory ([FromRoute] Guid id, UpdateCategoryRequestDTO request)
         {
             // convert DTO to domain 
@@ -110,6 +112,7 @@ namespace Project.API.Controllers
         // DELETE: /api/categories/{id}
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
         {
             var category = await _categoryRepo.DeleteAsync(id);

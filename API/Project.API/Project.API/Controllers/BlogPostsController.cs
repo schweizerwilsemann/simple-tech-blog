@@ -3,6 +3,7 @@ using Project.API.Models.DTOs;
 using Project.API.Models.Domain;
 using Project.API.Repositories.Interface;
 using Project.API.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Project.API.Controllers
@@ -23,6 +24,7 @@ namespace Project.API.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestDTO request)
         {
             // convert DTO to domain model
@@ -190,6 +192,7 @@ namespace Project.API.Controllers
         // PUT: /api/blogposts/{id}
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateBlogPostById([FromRoute] Guid id, UpdateBlogPostRequestDTO request)
         {
             // convert DTO to domain model
@@ -250,6 +253,7 @@ namespace Project.API.Controllers
         // DELETE: /api/blogposts/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteBlogPostById([FromRoute] Guid id)
         {
             var deletedBlogPost = await _blogPostRepo.DeleteAsync(id);
