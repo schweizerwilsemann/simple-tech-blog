@@ -25,4 +25,9 @@ export class CategoryList implements OnInit{
   onSearch(query: string): void {
     this.categories$ = this.categoryService.getAllCategories(query);
   }
+
+  sort(sortBy: string, sortDirection: string) {
+    console.log(">>>> im sorting here")
+    this.categories$ = this.categoryService.getAllCategories(undefined, sortBy, sortDirection);
+  }
 }

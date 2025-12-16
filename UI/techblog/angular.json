@@ -31,7 +31,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/prismjs/themes/prism-okaidia.css"            ],
+              "node_modules/prismjs/themes/prism-okaidia.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+            ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/prismjs/prism.js",
