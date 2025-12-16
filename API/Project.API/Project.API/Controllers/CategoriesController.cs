@@ -39,11 +39,13 @@ namespace Project.API.Controllers
             return Ok(response);
         }
     
-        // GET: /api/gategories?query=xxxx
+        // GET: /api/gategories?query=xxxx&sortBy=name&sortDirection=desc
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories([FromQuery]  string ? query)
+        public async Task<IActionResult> GetAllCategories([FromQuery] string? query,
+                                                          [FromQuery] string? sortBy,
+                                                          [FromQuery] string? sortDirection)
         {
-            var categories = await _categoryRepo.GetAllAsync(query);
+            var categories = await _categoryRepo.GetAllAsync(query, sortBy, sortDirection);
 
             // map domain model to DTO
             var response = new List<CategoryDTO>();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.API.Data;
 using Project.API.Models.Domain;
@@ -21,7 +22,8 @@ namespace Project.API.Repositories.Implementation
             return category;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync(string ? query = null)
+        public async Task<IEnumerable<Category>> GetAllAsync(string ? query = null, string? sortBy = null,
+                                                            string? sortDirection = null)
         {
             // query 
             var categories = _dbContext.Categories.AsQueryable();
@@ -37,6 +39,21 @@ namespace Project.API.Repositories.Implementation
             }
 
             // sorting
+            if(string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+                if(string.Equals(sortBy, "Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase) ? true : false;
+                    categories = isAsc ? categories.OrderBy(x => x.Name) : categories.OrderByDescending(x => x.Name);
+                }
+
+                if(string.Equals(sortBy, "URL", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase) ? true : false;
+                    categories = isAsc ? categories.OrderBy(x => x.UrlHandle) : categories.OrderByDescending(x => x.UrlHandle);
+                }
+            }
+            
             
             // pagination
 
