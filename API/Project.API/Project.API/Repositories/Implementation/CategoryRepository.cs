@@ -21,9 +21,27 @@ namespace Project.API.Repositories.Implementation
             return category;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync(string ? query = null)
         {
-            return await _dbContext.Categories.ToListAsync();
+            // query 
+            var categories = _dbContext.Categories.AsQueryable();
+            if(query is null)
+                Console.WriteLine("Query is null");
+
+            else Console.WriteLine(query);
+
+            // filtering
+            if(string.IsNullOrWhiteSpace(query) == false)
+            {
+                categories = categories.Where(x => x.Name!.Contains(query));
+            }
+
+            // sorting
+            
+            // pagination
+
+            return await categories.ToListAsync();
+            // return await _dbContext.Categories.ToListAsync();
         }
 
         public async Task<Category?> GetById([FromRoute] Guid categoryId)

@@ -39,11 +39,11 @@ namespace Project.API.Controllers
             return Ok(response);
         }
     
-        // GET: /api/gategories
+        // GET: /api/gategories?query=xxxx
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories()
+        public async Task<IActionResult> GetAllCategories([FromQuery]  string ? query)
         {
-            var categories = await _categoryRepo.GetAllAsync();
+            var categories = await _categoryRepo.GetAllAsync(query);
 
             // map domain model to DTO
             var response = new List<CategoryDTO>();
