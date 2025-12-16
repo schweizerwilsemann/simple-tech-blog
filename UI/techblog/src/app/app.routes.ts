@@ -7,12 +7,21 @@ import { AddBlogpostComponent} from './features/blog-post/add-blogpost/add-blogp
 import { EditBlogpost } from './features/blog-post/edit-blogpost/edit-blogpost';
 import { Home } from './features/public/home/home';
 import { BlogDetails } from './features/public/blog-details/blog-details';
+import { Login } from './features/auth/login/login';
 
 export const routes: Routes = [
   {
     path: '',
     component: Home
   },
+  {
+    path: 'login',
+    component: Login
+  },
+  // {
+  //   path: 'register',
+  //   component: Register
+  // },
   {
     path: 'blog/:url',
     component: BlogDetails
