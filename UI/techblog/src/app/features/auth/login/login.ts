@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoginRequest } from '@/app/features/auth/models/login-request.model';
-import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '@/app/features/auth/services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 export class Login {
   model: LoginRequest;
 
+  private authService = inject(AuthService);
+
 
   constructor() {
     this.model = {
@@ -21,6 +23,13 @@ export class Login {
   }
 
   onFormSubmit() {
-    console.log(this.model);
+    this.authService.login(this.model).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 }
